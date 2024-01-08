@@ -168,8 +168,8 @@ def qianJi():
         print(f'{e}')       
         return render_template('qianJi.html')
     
-@app.route('/meigaomei',methods=['get','post'])
-def meigaomei():
+@app.route('/zhidongli',methods=['get','post'])
+def zhidongli():
     try:
         data= request.form.get("inputEntry")
         codeName= 2
@@ -207,14 +207,14 @@ def meigaomei():
 
 
 
-            return render_template('meigaomei.html',table= datas.to_dict(orient='records'),data= seoutId,columns= datas.columns)            
+            return render_template('zhidongli.html',table= datas.to_dict(orient='records'),data= seoutId,columns= datas.columns)            
         else:
             datas= '查询出错，请输入查询'
             print(datas)            
-            return render_template('meigaomei.html')
+            return render_template('zhidongli.html')
     except Exception as e:
         print(f'{e}')       
-        return render_template('meigaomei.html')
+        return render_template('zhidongli.html')
 
 # 物料查询路由
 @app.route('/queryMaterial',methods= ['get','post'])
