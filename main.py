@@ -73,17 +73,18 @@ def jinLiPrint():
             for ds in data:
                 df= server_connect.query_SEord(ds,codeName)
                 datas= pd.concat([datas,df])
-            print('合并后的内容',datas)
+            print('合并后的内容')
+            print(datas)
 
 
             
-            # 备注等于物料名称以“膜”安分拆后列表中的第二个值。
-            datas.料号= datas.料号.str.split().str.get(1)
-            print('料号是',datas.料号)
-            datas['备注']= datas['物料名称'].str.split('膜').str.get(1)
-            # print('备注是',datas['备注'])
-            datas['整支规格新']= '(' + datas['整支规格'].str.split('*').str[1:3].str.join('*') + ')'
-            datas.整支规格= datas.整支规格 +'\n'+ datas.整支规格新
+            # 备注等于物料名称以“膜”字分拆后列表中的第二个值。
+            # datas.料号= datas.料号.str.split().str.get(1)
+            # print('料号是',datas.料号)
+            # datas['备注']= datas['物料名称'].str.split('膜').str.get(1)
+            # # print('备注是',datas['备注'])
+            # datas['整支规格新']= '(' + datas['整支规格'].str.split('*').str[1:3].str.join('*') + ')'
+            # datas.整支规格= datas.整支规格 +'\n'+ datas.整支规格新
             # print("改后的",datas.整支规格)
 
 
@@ -185,29 +186,29 @@ def zhidongli():
                 df= server_connect.query_SEord(ds,codeName)
                 # print('查询到的：',df)
                 datas= pd.concat([datas,df])
-            print('合并后的内容',datas)
+            print('合并后的内容')
             
-            datas['id']= datas['index']
-            datas.drop('index',axis=1,inplace=True)
-            datas['采购订单号']= datas['订单号']
-            datas.drop('订单号',axis=1,inplace=True)
-            datas['物料代码']= datas['料号']
-            datas.drop('料号',axis=1,inplace=True)
-            datas['物料描述']= datas['物料名称']
-            datas.drop('物料名称',axis=1,inplace=True)
-            datas['物料规格']= datas['整支规格']
-            datas.drop('整支规格',axis=1,inplace=True)
-            # datas['数量1']= datas['数量']
-            # datas.drop('数量',axis=1,inplace=True)
-            datas['备注']= ''
-            print(datas)
-            datas= datas.loc[:,['id','采购订单号','物料代码','物料描述','物料规格','数量','批号']]
-            print(datas)
-
-
-
-
-            return render_template('zhidongli.html',table= datas.to_dict(orient='records'),data= seoutId,columns= datas.columns)            
+            newdatas= datas.loc[:,[60,68,67,65,70,71,27]]
+            # print(newdatas)
+            new71= newdatas[71].str.split('*')
+            import re
+            newdatas['厚'],newdatas['宽'],newdatas['长'],newdatas['支']= [re.sub('[URM]','',x) for x in new71[0]]
+            # print(newdatas['厚'],newdatas['宽'],newdatas['长'],newdatas['支'])
+            newdatas.drop(71,inplace=True,axis=1)
+            newdatas['订单号']= newdatas[60][0]
+            newdatas['智动力编码']= newdatas[68][0]
+            newdatas['品名']= newdatas[67][0]
+            newdatas['数量']= newdatas[65][0]
+            newdatas['数量']= newdatas['数量'].apply(lambda x :round(float(x),2))
+            
+            newdatas['批次号']= newdatas[70][0]
+            newdatas['生产日期']= newdatas[27][0]
+            newdatas['生产日期']= newdatas['生产日期'].dt.date
+            
+            print(newdatas.drop([60,68,67,65,70,27],inplace=True,axis=1))
+            newdatas= newdatas.loc[:,['订单号','智动力编码','品名','厚','宽','长','支','数量','批次号','生产日期']]
+            print(newdatas)
+            return render_template('zhidongli.html',tables= newdatas.to_dict(orient='records'),data= seoutId)            
         else:
             datas= '查询出错，请输入查询'
             print(datas)            

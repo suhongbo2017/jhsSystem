@@ -34,7 +34,7 @@
                 <option value="customName1" selected >深圳市智动力精密技术股份有限公司</option>
                 <option value="customName2">广东省东莞市智动力精密技术有限公司</option>
             </select></p>
-            <p>No.: <input type="text" name="" id="" value=""> </p>
+            <p>No.: {{ data }} </p>
         </div>
         <div class="date d-flex justify-content-end">
             <p>日期：<input type="date" name="" id=""></p>
@@ -42,21 +42,61 @@
     </div>
 
     <div class="tableBody">
-        <table class="table table-bordered">
+        <table class="table table-bordered fs-9 border-dark">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>订单号</th>
+                    <th>智动力编码</th>
+                    <th>品名</th>
+                    <th>宽(mm)</th>
+                    <th>长(M)</th>
+                    <th>厚度(mm)</th>
+                    <th>Rs/Kg/Pcs</th>
+                    <th>平方米</th>
+                    <th>LOT.NO(批次号)</th>
+                    <th>生产日期</th>
+                    <th>备注</th>
+                    
                 </tr>
             </thead>
             <tbody>
+                <tr class="text-overflow">
+                    {% for row in tables %}
+                    {% for cell in row %}
+                    <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                 </tr>
             </tbody>
+
         </table>
 
     </div>
-    <div class="tableFeet"></div>
+    <div class="tableFeet ">
+        <div class="d-flex justify-content-between">
+            <p>制单人</p>
+            <p>审核</p>
+            <p>供应商(盖章)</p>
+            <p>收货人</p>
+            <p>审核</p>
+            <p>收方(盖章)</p>
+        </div>
+            <p>罗丽春</p>
+
+    </div>
 </div>
 
 {% endblock %}

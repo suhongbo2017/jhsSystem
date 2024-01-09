@@ -84,7 +84,7 @@ def query_SEord(params,codeName):
             return dfs
         
         elif codeName == 2:
-            sql2= f"SELECT FEntrySelfS0257, FEntrySelfS0240,FEntrySelfS0258,FEntrySelfS0248,FEntrySelfS0239,FEntrySelfS0244, FEntrySelfS0263 FROM AIS20191210135722.dbo.SEOutStockEntry WHERE FInterID = ?"
+            sql2= f"SELECT * FROM AIS20191210135722.dbo.SEOutStockEntry WHERE FINTERID  = ?"
 
             # 执行查询或其他数据库操作
             cursor.execute(sql2, data[0][0])
@@ -92,20 +92,20 @@ def query_SEord(params,codeName):
             print(rows1)
             data1=[[j for j in i] for i in rows1]
 
-            # print(data)
+            # print(data1)
             columns=['物料名称','备注','料号','批号','订单号','数量','整支规格']
-            dfs= pd.DataFrame(data1,columns=columns)
+            dfs= pd.DataFrame(data1)
 
             print('df',dfs)
             # 使用numpy把decimal格式的数字精度控制在2位。
-            dfs['数量']= dfs['数量'].apply(float).round(2)
+            # dfs['数量']= dfs['数量'].apply(float).round(2)
             # 使用JOIN对合并的备注进行拼接处理得到要求的字符串
             # dfs['备注']= dfs['备注'].apply(lambda x: ('*'.join(x.split('*')[-3::2]).replace('M','')+ ' '))
             # print(dfs['备注'])
 
             #对结果进行分类汇总
             # dfs= dfs.groupby('整支规格').agg({'物料名称':'first','料号':'first','批号':'first','订单号':'first','数量':'sum','备注':'sum'})
-            dfs['数量']= dfs['数量'].apply(float).round(2)
+            # dfs['FEntrySelfS0244']= dfs['FEntrySelfS0244'].apply(float).round(2)
             #新建index名称是ID
             dfs.reset_index(drop=False,inplace=True)
             dfs.index.name= 'ID'
