@@ -206,9 +206,10 @@ def zhidongli():
             newdatas['生产日期']= newdatas['生产日期'].dt.date
             
             print(newdatas.drop([60,68,67,65,70,27],inplace=True,axis=1))
-            newdatas= newdatas.loc[:,['订单号','智动力编码','品名','厚','宽','长','支','数量','批次号','生产日期']]
+            newdatas= newdatas.loc[:,['订单号','智动力编码','品名','宽','长','厚','支','数量','批次号','生产日期']]
             print(newdatas)
-            return render_template('zhidongli.html',tables= newdatas.to_dict(orient='records'),data= seoutId)            
+            print(newdatas.columns)
+            return render_template('zhidongli.html',tables= newdatas.to_dict(orient='records'),data= seoutId,names= newdatas.columns)            
         else:
             datas= '查询出错，请输入查询'
             print(datas)            

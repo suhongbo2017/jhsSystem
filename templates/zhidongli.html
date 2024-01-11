@@ -4,6 +4,7 @@
 
 {% block queryRow %}
 <!-- 查询提交区域 -->
+<link rel="stylesheet" href="../static/css/zhidongli.css">
 <form action="#" method="post" class="d-flex  m-3 flex-row justify-content-center d-print-none">
     <div class="row">
         <div class="d-flex text-align-center">
@@ -21,84 +22,65 @@
 
 {% endblock %}
 {% block container %}
-<div class="container d-flex flex-column">
-    <div class="tableHead ">
-        <div class="title d-flex justify-content-center">
-            <h3>东莞市金恒晟新材料科技有限公司</h3>
-        </div>
-        <div class="d-flex justify-content-center">
-            <h2>送货单</h2>
-        </div>
-        <div class="d-flex justify-content-between">
-            <p>客户名：<select name="customName" id="">
-                <option value="customName1" selected >深圳市智动力精密技术股份有限公司</option>
-                <option value="customName2">广东省东莞市智动力精密技术有限公司</option>
-            </select></p>
-            <p>No.: {{ data }} </p>
-        </div>
-        <div class="date d-flex justify-content-end">
-            <p>日期：<input type="date" name="" id=""></p>
-        </div>
-    </div>
+<div class="container">
+    <div class="title">东莞市金恒晟新材料科技有限公司
 
-    <div class="tableBody">
-        <table class="table table-bordered fs-9 border-dark">
-            <thead>
-                <tr>
-                    <th>订单号</th>
-                    <th>智动力编码</th>
-                    <th>品名</th>
-                    <th>宽(mm)</th>
-                    <th>长(M)</th>
-                    <th>厚度(mm)</th>
-                    <th>Rs/Kg/Pcs</th>
-                    <th>平方米</th>
-                    <th>LOT.NO(批次号)</th>
-                    <th>生产日期</th>
-                    <th>备注</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="text-overflow">
-                    {% for row in tables %}
-                    {% for cell in row %}
-                    <td>{{ row[cell] }}</td>
-                    {% endfor %}
-                </tr>
+    </select></div>
+    <div class="title1">送 货 单</div>
+    <div class="kehu">客户名：<select name="" id="">
+        <option value="" class="name1">广东省东莞市智动力精密技术有限公司</option>
+        <option value="" class="name2">东莞智动力电子科技有限公司</option>
+        <option value="" class="name3">深圳市智动力精密技术股份有限公司</option>
+    </select></div>
+    <div class="No">No.: {{ data }} </div>
+    <div class="date">日期： <input type="date" name="" id=""></div>
+
+    <div class="bianlan" style="writing-mode: vertical-lr;font-size: 15px;">白(存根)红(回单)黄(财务)蓝(仓库)绿(采购)</div>
+    <table class="table table-bordered border-dark">
+        <thead>
+            <tr>
+                <th rowspan=2>订单号</th>
+                <th rowspan=2>智动力编码</th>
+                <th rowspan=2>品名</th>
+                <th colspan=3>规格</th>
+                <th colspan=2>数量</th>
+                <th rowspan=2>LOT NO<br>(批次号)</th>
+                <th rowspan=2>生产<br>日期</th>
+                <th rowspan=2>备注</th>
+            </tr>
+            <tr>
+                <th>宽[mm]</th>
+                <th>长[M]</th>
+                <th>厚度[mm] </th>
+                <th>Rs<br>Kg/Pcs</th>
+                <th>平方米</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for row in tables %}
+                {% for cell in row %}
+                <td>{{ row[cell] }} </td>
+                
                 {% endfor %}
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="feet1">制单人</div>
+    <div class="feet2">罗丽春</div>
+    <div class="feet3">审核</div>
+    <div class="feet4">供应商(盖章)</div>
+    <div class="feet5">收货人</div>
+    <div class="feet6">审核</div>
+    <div class="feet7">收方(盖章)</div>
+    <div class="feet8">A5：(24cm×14cm)</div>
 
-        </table>
 
-    </div>
-    <div class="tableFeet ">
-        <div class="d-flex justify-content-between">
-            <p>制单人</p>
-            <p>审核</p>
-            <p>供应商(盖章)</p>
-            <p>收货人</p>
-            <p>审核</p>
-            <p>收方(盖章)</p>
-        </div>
-            <p>罗丽春</p>
 
-    </div>
+
 </div>
-
 {% endblock %}
 <!-- 下方是打印区域 -->
 {% block map %}
