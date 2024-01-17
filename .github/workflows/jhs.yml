@@ -18,5 +18,5 @@ jobs:
         with:
           python_ver: '3.12'
           spec: 'main.py'
-          upload_exe_with_name: 'love_heart'
+          upload_exe_with_name: 'main.py'
           options: -F --onefile --add-data "templates;templates" --add-data "static;static" --add-data "server_connect.py;." --add-data "write_mysql.py;." main.py, --windowed, 
